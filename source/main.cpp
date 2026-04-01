@@ -3,9 +3,7 @@
 
 int	main( int argc, char **argv) {
 
-    if (!VALID_ARGS)
-		how_to_use();
-	Todo	todo_cli;
-	todo_cli.run( argv, argc);
+	Todo	todo_cli(argv, argc, true);
+	todo_cli.run();
 	return (EXIT_SUCCESS);
 }

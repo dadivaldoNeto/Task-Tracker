@@ -2,34 +2,33 @@
 # pragma once
 
 # include <string>
-# include <cstdint>
 # include <chrono>
+# include <vector>
 
-
-typedef std::chrono::system_clock::time_point _task_time; 
-
-enum class e_task_status {
-    TODO,
-    IN_PROGRESS,
-    DONE
-};
+typedef std::chrono::system_clock::time_point _task_time;
 
 class Task {
 
-    private:
+	private:
 		static	int			common_id;
-        int					id;
-        std::string         desc;
-        enum e_task_status    status;
-        _task_time          createdAt;
-        _task_time          updatedAt;
+		int					id;
+		std::string         desc;
+		std::string			status;
+		_task_time          createdAt;
+		_task_time          updatedAt;
+
+	private:
 		void	_update_time ( void );
 		Task();
 
-    public:
+	public:
 		Task	(std::string &u_desc);
-		void	update_status(enum e_task_status &u_status);
-        void    update_desc(std::string &u_desc);
+		void	update_status(const std::string &u_status);
+		void    update_desc(const std::string &u_desc);
 
+		static int			len (void);
+		int			get_id (void) const;
+		std::string	get_desc (void) const;
+		std::string	get_status (void) const;
 };
 

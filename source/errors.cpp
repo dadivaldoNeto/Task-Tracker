@@ -10,5 +10,4 @@ void    how_to_use() {
     std::cout << "./task-cli delete <task-id> " << std::endl;
     std::cout << "./task-cli [mark-done | mark-in-progress] <task-id>" << std::endl;
     std::cout << "./task-cli [list | list todo | list done | list in-progress]" << std::endl;
-	exit(EXIT_FAILURE);
 }
