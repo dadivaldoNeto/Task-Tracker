@@ -1,23 +1,25 @@
 
 # Dadivaldo 01-04-2026
 
-__dummy = $(shell mkdir -p build/exec build/obj)
 NAME= build/exec/task-cli
 SRC = $(wildcard source/*.cpp)
 OBJS= $(patsubst source/%.o, build/obj/%.o, $(patsubst %.cpp, %.o, $(SRC) ) )
-HEADERS= header/task_cli.hpp
+HEADERS= $(wildcard header/*.hpp)
 
 CXX=g++
 CXXFLAGS= -std=c++11 -g -Wall -Wextra -Werror -I header
 
 
-all: $(NAME)
+all: $(NAME) | folder
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@ 
+$(NAME): $(OBJS) | folder
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 
-build/obj/%.o: source/%.cpp
+folder:
+	@mkdir -p build/exec build/obj && mkdir -p db
+
+build/obj/%.o: source/%.cpp | folder
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 

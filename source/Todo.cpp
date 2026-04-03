@@ -55,10 +55,7 @@ void Todo::list(void)
 	{
 		argument = *args;
 		if (!(argument == "done" || argument == "todo" || argument == "in-progress"))
-		{
-			std::cout << "Invalid Option" << std::endl;
-			return;
-		}
+			return task_not_found();
 	}
 	if (tasks.empty())
 	{
@@ -69,9 +66,10 @@ void Todo::list(void)
 	{
 		if (!(argument.empty() || argument == tasks.at(i).get_status()))
 			continue;
-		std::cout << "Id : " << tasks.at(i).get_id() << std::endl;
+		std::cout << "Id 		  : " << tasks.at(i).get_id() << std::endl;
 		std::cout << "Description : " << tasks.at(i).get_desc() << std::endl;
-		std::cout << "Status : " << tasks.at(i).get_status() << std::endl;
+		std::cout << "Status 	  : " << tasks.at(i).get_status() << std::endl;
+		std::cout << std::endl;
 	}
 }
 

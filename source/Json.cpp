@@ -95,6 +95,19 @@ namespace Json_std
 		return (ans);
 	}
 
+	std::string time(std::vector<std::string> &tokens, size_t &index, char *key)
+	{
+		if (!expect(tokens, key, index))
+			return {};
+		if (!expect(tokens, ":", index))
+			return {};
+		if (index >= tokens.size())
+			return {};
+		std::string ans = std::move(tokens.at(index++));
+		erse_start_quotes(ans);
+		return (ans);
+	}
+
 	Task objects(std::vector<std::string> &tokens, size_t &index)
 	{
 
@@ -109,10 +122,15 @@ namespace Json_std
 		if (!expect(tokens, ",", index))
 			return {};
 		stat = status(tokens, index);
+		if (!expect(tokens, ",", index))
+			return {};
+		std::string crated_at = time(tokens, index, CREATED_AT);
+		if (!expect(tokens, ",", index))
+			return {};
+		std::string updated_at = time(tokens, index, UPDATED_AT);
 		if (!expect(tokens, "}", index))
 			return {};
-		Task task(descrip);
-		task.update_status(stat);
+		Task task(descrip, stat, crated_at, updated_at);
 		return task;
 	}
 
@@ -161,16 +179,20 @@ namespace Json_std
 				break;
 			Task &tmp = tasks[i];
 			file << "\t{" << std::endl;
-			file << "\t\t\"id\" : " << tmp.get_id() << ",\n";
-			file << "\t\t\"description\" : " << PUT_IN_QUOTES(tmp.get_desc()) << ",\n";
-			file << "\t\t\"status\" : " << PUT_IN_QUOTES(tmp.get_status()) << std::endl;
+			file << KEY("id") << tmp.get_id() << ",\n";
+			file << KEY("description") << PUT_IN_QUOTES(tmp.get_desc()) ",\n";
+			file << KEY("status") << PUT_IN_QUOTES(tmp.get_status()) ",\n";
+			file << KEY("created_at") << PUT_IN_QUOTES(tmp.get_created_at()) ",\n";
+			file << KEY("updated_at") << PUT_IN_QUOTES(tmp.get_updated_at()) << std::endl;
 			file << "\t}," << std::endl;
 		}
 		Task &tmp = tasks[i];
 		file << "\t{" << std::endl;
-		file << "\t\t\"id\" : " << tmp.get_id() << ",\n";
-		file << "\t\t\"description\" : " << PUT_IN_QUOTES(tmp.get_desc()) << ",\n";
-		file << "\t\t\"status\" : " << PUT_IN_QUOTES(tmp.get_status()) << std::endl;
+		file << KEY("id") << tmp.get_id() << ",\n";
+		file << KEY("description") << PUT_IN_QUOTES(tmp.get_desc()) ",\n";
+		file << KEY("status") << PUT_IN_QUOTES(tmp.get_status()) ",\n";
+		file << KEY("created_at") << PUT_IN_QUOTES(tmp.get_created_at()) ",\n";
+		file << KEY("updated_at") << PUT_IN_QUOTES(tmp.get_updated_at()) << std::endl;
 		file << "\t}" << "\n";
 		file << "]" << std::endl;
 		file.close();
