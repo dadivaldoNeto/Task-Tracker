@@ -1,9 +1,10 @@
 
-# include "Task.hpp"
+#include "Task.hpp"
 
-int	Task::common_id = 0;
+int Task::common_id = 0;
 
-Task::Task(std::string &u_desc) {
+Task::Task(std::string &u_desc)
+{
 	id = common_id++;
 	desc = std::move(u_desc);
 	status = "TODO";
@@ -11,32 +12,44 @@ Task::Task(std::string &u_desc) {
 	updatedAt = createdAt;
 }
 
-void	Task::update_desc(const std::string &u_desc) {
+Task::Task()
+{
+	id = -1;
+}
+
+void Task::update_desc(const std::string &u_desc)
+{
 	desc = std::move(u_desc);
 	_update_time();
 }
 
-void	Task::update_status(const std::string &u_status) {
+void Task::update_status(const std::string &u_status)
+{
 	status = std::move(u_status);
 	_update_time();
 }
 
-void	Task::_update_time( void ) {
+void Task::_update_time(void)
+{
 	updatedAt = std::chrono::system_clock::now();
 }
 
-int	Task::get_id( void ) const {
+int Task::get_id(void) const
+{
 	return id;
 }
 
-std::string	Task::get_desc ( void ) const {
+std::string Task::get_desc(void) const
+{
 	return (desc);
 }
 
-std::string	Task::get_status ( void ) const {
+std::string Task::get_status(void) const
+{
 	return (status);
 }
 
-int	Task::len( void ) {
+int Task::len(void)
+{
 	return (common_id);
 }

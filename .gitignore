@@ -39,3 +39,7 @@
 
 # debug information files
 *.dwo
+
+lab/
+
+file.json

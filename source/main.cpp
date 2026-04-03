@@ -1,9 +1,10 @@
 
-# include "task_cli.hpp"
+#include "task_cli.hpp"
 
-int	main( int argc, char **argv) {
+int main(int argc, char **argv)
+{
 
-	Todo	todo_cli(argv, argc, true);
+	Todo todo_cli(argv, argc);
 	todo_cli.run();
 	return (EXIT_SUCCESS);
 }

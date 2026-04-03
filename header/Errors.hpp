@@ -2,4 +2,4 @@
 
 #include <iostream>
 
-void    how_to_use();
+void how_to_use();
