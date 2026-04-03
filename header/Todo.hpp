@@ -31,6 +31,11 @@ private:
 public:
 	Todo(char **u_args, int u_len);
 	~Todo(void);
+	void delete_task(void);
+	void list(void);
+	void mark_done(void);
+	void mark_in_progress(void);
+	void update(void);
 	void run(void);
 	void add(void);
 };

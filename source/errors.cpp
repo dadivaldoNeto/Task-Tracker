@@ -13,3 +13,10 @@ void how_to_use()
     std::cout << "./task-cli [list | list todo | list done | list in-progress]" << std::endl;
     exit(EXIT_FAILURE);
 }
+
+
+void    task_not_found(void) {
+	std::cout << "Task not found" << std::endl;
+	std::cout << "Try :" << std::endl;
+	std::cout << "./task-cli [list | list todo | list done | list in-progress]" << std::endl;
+}

@@ -7,7 +7,7 @@ Task::Task(std::string &u_desc)
 {
 	id = common_id++;
 	desc = std::move(u_desc);
-	status = "TODO";
+	status = "todo";
 	createdAt = std::chrono::system_clock::now();
 	updatedAt = createdAt;
 }

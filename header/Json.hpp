@@ -10,7 +10,6 @@
 #define PUT_IN_QUOTES(x) "\"" << (x) << "\""
 #define JSON_FILE "file.json"
 
-
 /*
 
 PARSER_JSON GRAMMAR

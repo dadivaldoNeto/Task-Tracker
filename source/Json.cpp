@@ -60,8 +60,12 @@ namespace Json_std
 		if (str.empty())
 			return;
 		size_t i = str.find_first_not_of("\t ");
+		if (i == str.npos)
+			return ;
 		str.erase(0, i + 1);
 		i = str.find_last_not_of("\t ");
+		if (i == str.npos)
+			return ;
 		str.erase(i);
 	}
 
@@ -125,8 +129,9 @@ namespace Json_std
 		aux = objects(tokens, i);
 		if (aux.get_id() <= -1)
 			return {};
+		tmp.push_back(aux);
 		if (expect(tokens, "]", i) && i >= tokens.size())
-			return (tmp.push_back(aux), tmp);
+			return (tmp);
 		while (true)
 		{
 			if (!expect(tokens, ",", i))
@@ -144,10 +149,16 @@ namespace Json_std
 	void task_to_json(std::vector<Task> &tasks)
 	{
 		std::fstream file(JSON_FILE, std::fstream::out | std::fstream::trunc);
-		int i = 0;
+		if (tasks.empty()) {
+			file.close();
+			return ;
+		}
+		size_t i = 0;
 		file << "[" << std::endl;
-		for (; i < Task::len() - 1; i++)
+		for (; i < tasks.size(); i++)
 		{
+			if (i + 1 == tasks.size())
+				break;
 			Task &tmp = tasks[i];
 			file << "\t{" << std::endl;
 			file << "\t\t\"id\" : " << tmp.get_id() << ",\n";
